@@ -1,0 +1,482 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/bermi/password-generator#readme"
+
+    >password-generator (v2.1.0)</a>
+</h1>
+<h4>Memorable password generator. For the command line, Node.js and the browser.</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.password-generator">module password-generator</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.password-generator.password-generator">
+            function <span class="apidocSignatureSpan"></span>password-generator
+            <span class="apidocSignatureSpan">(length, memorable, pattern, prefix)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.password-generator.grunt">
+            function <span class="apidocSignatureSpan">password-generator.</span>grunt
+            <span class="apidocSignatureSpan">(grunt)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.password-generator.password_generator">
+            function <span class="apidocSignatureSpan">password-generator.</span>password_generator
+            <span class="apidocSignatureSpan">(length, memorable, pattern, prefix)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.password-generator.toString">
+            function <span class="apidocSignatureSpan">password-generator.</span>toString
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.password-generator.grunt">module password-generator.grunt</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.password-generator.grunt.grunt">
+            function <span class="apidocSignatureSpan">password-generator.</span>grunt
+            <span class="apidocSignatureSpan">(grunt)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.password-generator.toString">module password-generator.toString</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.password-generator.toString.toString">
+            function <span class="apidocSignatureSpan">password-generator.</span>toString
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.password-generator" id="apidoc.module.password-generator">module password-generator</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.password-generator.password-generator" id="apidoc.element.password-generator.password-generator">
+        function <span class="apidocSignatureSpan"></span>password-generator
+        <span class="apidocSignatureSpan">(length, memorable, pattern, prefix)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">password-generator = function (length, memorable, pattern, prefix) {
+  var char = &#x22;&#x22;, n, i, validChars = [];
+  if (length == null) {
+    length = 10;
+  }
+  if (memorable == null) {
+    memorable = true;
+  }
+  if (pattern == null) {
+    pattern = /\w/;
+  }
+  if (prefix == null) {
+    prefix = &#x27;&#x27;;
+  }
+
+  // Non memorable passwords will pick characters from a pre-generated
+  // list of characters
+  if (!memorable) {
+    for (i = 33; 126 &#x3e; i; i += 1) {
+      char = String.fromCharCode(i);
+      if (char.match(pattern)) {
+        validChars.push(char);
+      }
+    }
+
+    if (!validChars.length) {
+      throw new Error(&#x22;Could not find characters that match the &#x22; +
+        &#x22;password pattern &#x22; + pattern + &#x22;. Patterns must match individual &#x22; +
+        &#x22;characters, not the password as a whole.&#x22;);
+    }
+  }
+
+
+  while (prefix.length &#x3c; length) {
+    if (memorable) {
+      if (prefix.match(consonant)) {
+        pattern = vowel;
+      } else {
+        pattern = consonant;
+      }
+      n = rand(33, 126);
+      char = String.fromCharCode(n);
+    } else {
+      char = validChars[rand(0, validChars.length)];
+    }
+
+    if (memorable) {
+      char = char.toLowerCase();
+    }
+    if (char.match(pattern)) {
+      prefix = &#x22;&#x22; + prefix + char;
+    }
+  }
+  return prefix;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.password-generator.grunt" id="apidoc.element.password-generator.grunt">
+        function <span class="apidocSignatureSpan">password-generator.</span>grunt
+        <span class="apidocSignatureSpan">(grunt)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">grunt = function (grunt) {
+
+  // Project configuration.
+  grunt.initConfig({
+    lint: {
+      files: [&#x27;grunt.js&#x27;, &#x27;index.js&#x27;, &#x27;lib/*.js&#x27;, &#x27;test/*.js&#x27;, &#x27;bin/*&#x27;]
+    },
+    watch: {
+      files: [&#x27;grunt.js&#x27;, &#x27;index.js&#x27;, &#x27;lib/*.js&#x27;, &#x27;test/*.js&#x27;, &#x27;bin/*&#x27;],
+      tasks: &#x27;lint&#x27;
+    },
+    jshint: {
+      options: {
+        strict: false,
+        bitwise: true,
+        curly: true,
+        eqeqeq: true,
+        forin: true,
+        immed: true,
+        latedef: true,
+        newcap: true,
+        noarg: true,
+        nonew: true,
+        plusplus: true,
+        regexp: true,
+        noempty: true,
+        sub: true,
+        undef: true,
+        trailing: true,
+        eqnull: true,
+        browser: true,
+        node: true,
+        indent: 2,
+        onevar: true,
+        white: true
+      },
+      globals: {
+        describe: true,
+        expect: true,
+        it: true,
+        before: true,
+        ender: true
+      }
+    },
+    pkg: &#x27;&#x3c;json:package.json&#x3e;&#x27;,
+    meta: {
+      banner: &#x22;/*! &#x3c;%= pkg.name %&#x3e; - v&#x3c;%= pkg.version %&#x3e; &#x22; +
+      &#x27;(&#x3c;%= grunt.template.today(&#x22;yyyy-mm-dd&#x22;) %&#x3e;)&#x27; +
+      &#x22;\n* -----------------\n&#x22; +
+      &#x22;* Copyright(c) 2011-2015 Bermi Ferrer &#x3c;bermi@bermilabs.com&#x3e;\n&#x22; +
+      &#x22;* MIT Licensed\n*/&#x22;
+    },
+    concat: {
+      dist: {
+        src: [&#x27;lib/password-generator.js&#x27;],
+        dest: &#x27;dist/password-generator.js&#x27;
+      }
+    },
+    min: {
+      dist: {
+        src: [&#x27;&#x3c;banner&#x3e;&#x27;, &#x27;dist/password-generator.js&#x27;],
+        dest: &#x27;dist/password-generator.min.js&#x27;
+      }
+    }
+  });
+
+  // Default task.
+  grunt.registerTask(&#x27;default&#x27;, &#x27;lint&#x27;);
+
+  // Build task.
+  grunt.registerTask(&#x27;build&#x27;, &#x27;lint concat min&#x27;);
+
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.password-generator.password_generator" id="apidoc.element.password-generator.password_generator">
+        function <span class="apidocSignatureSpan">password-generator.</span>password_generator
+        <span class="apidocSignatureSpan">(length, memorable, pattern, prefix)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">password_generator = function (length, memorable, pattern, prefix) {
+  var char = &#x22;&#x22;, n, i, validChars = [];
+  if (length == null) {
+    length = 10;
+  }
+  if (memorable == null) {
+    memorable = true;
+  }
+  if (pattern == null) {
+    pattern = /\w/;
+  }
+  if (prefix == null) {
+    prefix = &#x27;&#x27;;
+  }
+
+  // Non memorable passwords will pick characters from a pre-generated
+  // list of characters
+  if (!memorable) {
+    for (i = 33; 126 &#x3e; i; i += 1) {
+      char = String.fromCharCode(i);
+      if (char.match(pattern)) {
+        validChars.push(char);
+      }
+    }
+
+    if (!validChars.length) {
+      throw new Error(&#x22;Could not find characters that match the &#x22; +
+        &#x22;password pattern &#x22; + pattern + &#x22;. Patterns must match individual &#x22; +
+        &#x22;characters, not the password as a whole.&#x22;);
+    }
+  }
+
+
+  while (prefix.length &#x3c; length) {
+    if (memorable) {
+      if (prefix.match(consonant)) {
+        pattern = vowel;
+      } else {
+        pattern = consonant;
+      }
+      n = rand(33, 126);
+      char = String.fromCharCode(n);
+    } else {
+      char = validChars[rand(0, validChars.length)];
+    }
+
+    if (memorable) {
+      char = char.toLowerCase();
+    }
+    if (char.match(pattern)) {
+      prefix = &#x22;&#x22; + prefix + char;
+    }
+  }
+  return prefix;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.password-generator.toString" id="apidoc.element.password-generator.toString">
+        function <span class="apidocSignatureSpan">password-generator.</span>toString
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">toString = function () {
+    return text;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.password-generator.grunt" id="apidoc.module.password-generator.grunt">module password-generator.grunt</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.password-generator.grunt.grunt" id="apidoc.element.password-generator.grunt.grunt">
+        function <span class="apidocSignatureSpan">password-generator.</span>grunt
+        <span class="apidocSignatureSpan">(grunt)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">grunt = function (grunt) {
+
+  // Project configuration.
+  grunt.initConfig({
+    lint: {
+      files: [&#x27;grunt.js&#x27;, &#x27;index.js&#x27;, &#x27;lib/*.js&#x27;, &#x27;test/*.js&#x27;, &#x27;bin/*&#x27;]
+    },
+    watch: {
+      files: [&#x27;grunt.js&#x27;, &#x27;index.js&#x27;, &#x27;lib/*.js&#x27;, &#x27;test/*.js&#x27;, &#x27;bin/*&#x27;],
+      tasks: &#x27;lint&#x27;
+    },
+    jshint: {
+      options: {
+        strict: false,
+        bitwise: true,
+        curly: true,
+        eqeqeq: true,
+        forin: true,
+        immed: true,
+        latedef: true,
+        newcap: true,
+        noarg: true,
+        nonew: true,
+        plusplus: true,
+        regexp: true,
+        noempty: true,
+        sub: true,
+        undef: true,
+        trailing: true,
+        eqnull: true,
+        browser: true,
+        node: true,
+        indent: 2,
+        onevar: true,
+        white: true
+      },
+      globals: {
+        describe: true,
+        expect: true,
+        it: true,
+        before: true,
+        ender: true
+      }
+    },
+    pkg: &#x27;&#x3c;json:package.json&#x3e;&#x27;,
+    meta: {
+      banner: &#x22;/*! &#x3c;%= pkg.name %&#x3e; - v&#x3c;%= pkg.version %&#x3e; &#x22; +
+      &#x27;(&#x3c;%= grunt.template.today(&#x22;yyyy-mm-dd&#x22;) %&#x3e;)&#x27; +
+      &#x22;\n* -----------------\n&#x22; +
+      &#x22;* Copyright(c) 2011-2015 Bermi Ferrer &#x3c;bermi@bermilabs.com&#x3e;\n&#x22; +
+      &#x22;* MIT Licensed\n*/&#x22;
+    },
+    concat: {
+      dist: {
+        src: [&#x27;lib/password-generator.js&#x27;],
+        dest: &#x27;dist/password-generator.js&#x27;
+      }
+    },
+    min: {
+      dist: {
+        src: [&#x27;&#x3c;banner&#x3e;&#x27;, &#x27;dist/password-generator.js&#x27;],
+        dest: &#x27;dist/password-generator.min.js&#x27;
+      }
+    }
+  });
+
+  // Default task.
+  grunt.registerTask(&#x27;default&#x27;, &#x27;lint&#x27;);
+
+  // Build task.
+  grunt.registerTask(&#x27;build&#x27;, &#x27;lint concat min&#x27;);
+
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.password-generator.toString" id="apidoc.module.password-generator.toString">module password-generator.toString</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.password-generator.toString.toString" id="apidoc.element.password-generator.toString.toString">
+        function <span class="apidocSignatureSpan">password-generator.</span>toString
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function toString() { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
