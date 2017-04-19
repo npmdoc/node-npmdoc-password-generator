@@ -1,4 +1,7 @@
-# api documentation for  [password-generator (v2.1.0)](https://github.com/bermi/password-generator#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-password-generator.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-password-generator) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-password-generator.svg)](https://travis-ci.org/npmdoc/node-npmdoc-password-generator)
+# npmdoc-password-generator
+
+#### api documentation for  [password-generator (v2.1.0)](https://github.com/bermi/password-generator#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-password-generator.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-password-generator) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-password-generator.svg)](https://travis-ci.org/npmdoc/node-npmdoc-password-generator)
+
 #### Memorable password generator. For the command line, Node.js and the browser.
 
 [![NPM](https://nodei.co/npm/password-generator.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/password-generator)
